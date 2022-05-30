@@ -10,6 +10,9 @@
 
   <Discount/>
 
+  <button @click="priceSort">가격순정렬</button>  
+  <button @click="sortBack">되돌리기</button>
+
   <Card @openModal="isModalOpen = true; onpress = $event"
         :products="products[i]"
         v-for="(product, i) in products" :key="product"/>
@@ -30,13 +33,22 @@ export default {
       isModalOpen : false,
       신고수 : [0, 0, 0],
       menus : ['Home', 'Product', 'About'],
-      products : onerooms,
+      origin_product : [...onerooms],
+      products : [...onerooms],
     }
   },
 
   methods : {
     increase(i){
       this.신고수[i]++;
+    },
+    priceSort(){
+      this.products.sort(function(a,b){
+        return a.price - b.price
+      })
+    },
+    sortBack(){
+      this.products = [...this.origin_product];
     }
   },
 
