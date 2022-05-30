@@ -8,7 +8,7 @@
            @closeModal="isModalOpen=false"/>
   </transition>
 
-  <Discount/>
+  <Discount v-if="showDiscount == true"/>
 
   <button @click="priceSort">가격순정렬</button>  
   <button @click="sortBack">되돌리기</button>
@@ -29,6 +29,7 @@ export default {
   name: 'App',
   data(){
     return {
+      showDiscount : true,
       onpress : 0,
       isModalOpen : false,
       신고수 : [0, 0, 0],
@@ -49,8 +50,14 @@ export default {
     },
     sortBack(){
       this.products = [...this.origin_product];
-    }
+    },
   },
+
+  mounted() {
+      setTimeout(()=>{
+        this.showDiscount = false;
+      }, 2000);
+    }, 
 
   components:{
     Modal : Modal,
